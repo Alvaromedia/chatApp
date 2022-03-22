@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import {
-  View,
-  Text,
-  Button,
-  TextInput,
   ImageBackground,
   StyleSheet,
-  Pressable,
+  Text,
+  TextInput,
   TouchableOpacity,
+  View,
 } from 'react-native';
 
 export default class Start extends Component {
@@ -35,52 +33,63 @@ export default class Start extends Component {
     return (
       <ImageBackground
         source={require('../assets/BackgroundImage.png')}
-        style={styles.container}
+        style={styles.bgImg}
       >
-        <View>
+        <View style={styles.container}>
           <Text style={styles.title}>Chat App</Text>
-        </View>
 
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            onChangeText={text => this.setState({ name: text })}
-            value={this.state.name}
-            placeholder="Your name"
-          />
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              onChangeText={text => this.setState({ name: text })}
+              value={this.state.name}
+              placeholder="Your name"
+            />
 
-          <View style={styles.colorSelection}>
-            <Text style={styles.chooseBgColor}>Choose a Background Color</Text>
+            <View style={styles.colorSelection}>
+              <Text style={styles.chooseBgColor}>
+                Choose a Background Color
+              </Text>
+
+              <View style={styles.colorAvatars}>
+                <TouchableOpacity
+                  style={styles.black}
+                  onPress={() => this.changeColor(this.backgroundColors.black)}
+                ></TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.lightGray}
+                  onPress={() =>
+                    this.changeColor(this.backgroundColors.lightGray)
+                  }
+                ></TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.lightBlue}
+                  onPress={() =>
+                    this.changeColor(this.backgroundColors.lightBlue)
+                  }
+                ></TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.lightGreen}
+                  onPress={() =>
+                    this.changeColor(this.backgroundColors.lightGreen)
+                  }
+                ></TouchableOpacity>
+              </View>
+            </View>
+
+            <TouchableOpacity
+              style={styles.button}
+              title="Go to Chat"
+              onPress={() =>
+                this.props.navigation.navigate('Chat', {
+                  name: this.state.name,
+                  bgColor: this.state.bgColor,
+                })
+              }
+            >
+              <Text style={styles.buttonText}>Start chatting</Text>
+            </TouchableOpacity>
           </View>
-
-          <View style={styles.colorAvatars}>
-            <TouchableOpacity
-              style={styles.black}
-              onPress={() => this.changeColor(this.backgroundColors.black)}
-            ></TouchableOpacity>
-            <TouchableOpacity
-              style={styles.lightGray}
-              onPress={() => this.changeColor(this.backgroundColors.lightGray)}
-            ></TouchableOpacity>
-            <TouchableOpacity
-              style={styles.lightBlue}
-              onPress={() => this.changeColor(this.backgroundColors.lightBlue)}
-            ></TouchableOpacity>
-            <TouchableOpacity
-              style={styles.lightGreen}
-              onPress={() => this.changeColor(this.backgroundColors.lightGreen)}
-            ></TouchableOpacity>
-          </View>
-
-          <Pressable
-            style={styles.button}
-            title="Go to Chat"
-            onPress={() =>
-              this.props.navigation.navigate('Chat', { name: this.state.name })
-            }
-          >
-            <Text style={styles.buttonText}>Start chatting</Text>
-          </Pressable>
         </View>
       </ImageBackground>
     );
@@ -94,7 +103,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
+  bgImg: {
+    justifyContent: 'center',
+    width: '100%',
+    height: '100%',
+  },
+
   title: {
+    flex: 1,
     marginTop: 120,
     fontSize: 45,
     fontWeight: '600',
@@ -123,7 +139,7 @@ const styles = StyleSheet.create({
   },
 
   colorSelection: {
-    alignSelf: 'flex-start',
+    width: '90%',
     margin: 15,
     padding: 10,
   },
@@ -136,7 +152,7 @@ const styles = StyleSheet.create({
 
   colorAvatars: {
     flexDirection: 'row',
-    justifyContent: 'space-between', // FIXME: It doesn't work as supposed.
+    justifyContent: 'space-between', // FIXME: It is fixed now.
   },
 
   button: {
