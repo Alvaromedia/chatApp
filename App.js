@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { StyleSheet } from 'react-native';
 
@@ -16,7 +16,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 // create the navigator
 const Stack = createStackNavigator();
 
-export default class HelloWorld extends Component {
+export default class HelloWorld extends React.Component {
   constructor(props) {
     super(props);
   }

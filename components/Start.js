@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   ImageBackground,
   StyleSheet,
@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 
-export default class Start extends Component {
+export default class Start extends React.Component {
   constructor(props) {
     super(props);
 

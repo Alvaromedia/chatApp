@@ -10,7 +10,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
-export default class CustomActions extends Component {
+export default class CustomActions extends React.Component {
   // allows to upload an image from the devices gallery
   pickImage = async () => {
     // asks for permission
@@ -19,10 +19,10 @@ export default class CustomActions extends Component {
       try {
         let result = await ImagePicker.launchImageLibraryAsync({
           // alows only images
-          mediaTypes: 'Images',
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
         });
-
         console.log(result);
+
         if (!result.cancelled) {
           const imageUrl = await this.uploadImage(result.uri);
           this.props.onSend({ image: imageUrl });
@@ -40,10 +40,11 @@ export default class CustomActions extends Component {
     try {
       if (status === 'granted') {
         let result = await ImagePicker.launchCameraAsync({
-          mediaTypes: 'All',
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
         }).catch(error => {
           console.error(error);
         });
+
         if (!result.cancelled) {
           const imageUrl = await this.uploadImage(result.uri);
           this.props.onSend({ image: imageUrl });
