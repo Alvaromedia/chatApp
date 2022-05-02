@@ -1,21 +1,17 @@
 import React from 'react';
 import { Bubble, GiftedChat, InputToolbar } from 'react-native-gifted-chat';
-import {
-  View,
-  Text,
-  Button,
-  Platform,
-  KeyboardAvoidingView,
-} from 'react-native';
+import { View, Button, Platform, KeyboardAvoidingView } from 'react-native';
 
 import CustomActions from './CustomActions';
 
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+import 'firebase/compat/storage';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import NetInfo from '@react-native-community/netinfo';
+import MapView from 'react-native-maps';
 
 export default class Chat extends React.Component {
   constructor() {
@@ -142,7 +138,7 @@ export default class Chat extends React.Component {
         createdAt: data.createdAt.toDate(),
         user: data.user,
         image: data.image || null,
-        location: data.locaiton || null,
+        location: data.location || null,
       });
     });
     this.setState({
